@@ -1,24 +1,18 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
-import ButtonFeedback from './FeedbackOptions.styled';
-
-class FeedbackOptions extends Component {
-  render() {
-    const { options, onLeaveFeedback } = this.props;
-    return (
-      <>
-        {options.map(option => (
-          <ButtonFeedback type="button" onClick={onLeaveFeedback} key={option}>
-            {option}
-          </ButtonFeedback>
-        ))}
-      </>
-    );
-  }
-}
-
-FeedbackOptions.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onLeaveFeedback: PropTypes.func.isRequired,
+import { Button } from './FeadbackOptions.styled';
+const FeadbackOptions = props => {
+  const { onLeaveFeedback, options } = props;
+  return (
+    <ul>
+      {options.map(el => (
+        <li key={el}>
+          <Button type={el} onClick={() => onLeaveFeedback(el)}>
+            {el.charAt(0).toUpperCase() + el.slice(1)}
+            {/* можна було й зробити через css але захотілось так */}
+          </Button>
+        </li>
+      ))}
+    </ul>
+  );
 };
-export default FeedbackOptions;
+
+export default FeadbackOptions;
